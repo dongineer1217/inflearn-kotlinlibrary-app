@@ -1,6 +1,6 @@
 package com.group.libraryapp.calculator
 
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.Test
 
 
@@ -16,9 +16,7 @@ class CalculatorTest {
         calculator.add(3)
 
         //then
-        if (calculator.number != 8) {
-            throw IllegalStateException()
-        }
+        assertThat(calculator.number).isEqualTo(8)
     }
 
     @Test
@@ -30,9 +28,19 @@ class CalculatorTest {
         calculator.minus(3)
 
         //then
-        if (calculator.number != 2) {
-            throw IllegalStateException()
-        }
+        assertThat(calculator.number).isEqualTo(2)
+    }
+
+    @Test
+    fun multiplyTest() {
+        //given
+        val calculator = Calculator(5)
+
+        //when
+        calculator.multiply(3)
+
+        //then
+        assertThat(calculator.number).isEqualTo(15)
     }
 
     @Test
@@ -44,9 +52,7 @@ class CalculatorTest {
         calculator.divide(2)
 
         //then
-        if (calculator.number != 2) {
-            throw IllegalStateException()
-        }
+        assertThat(calculator.number).isEqualTo(2);
     }
 
     @Test
@@ -55,15 +61,16 @@ class CalculatorTest {
         val calculator = Calculator(5)
 
         //when
-        try {
+        var message1 = org.junit.jupiter.api.assertThrows<IllegalArgumentException> {
             calculator.divide(0)
-        } catch (e: IllegalArgumentException) {
-            return
-        } catch (e: Exception) {
-            throw IllegalStateException();
+        }.message
+        assertThat(message1).isEqualTo("0으로 나눌 수 없습니다.")
+
+        org.junit.jupiter.api.assertThrows<IllegalArgumentException> {
+            calculator.divide(0)
+        }.apply {
+            assertThat(message).isEqualTo("0으로 나눌 수 없습니다.")
         }
-        throw IllegalStateException("기대하는 예외가 발생하지 않았습니다.")
+
     }
-
-
 }
