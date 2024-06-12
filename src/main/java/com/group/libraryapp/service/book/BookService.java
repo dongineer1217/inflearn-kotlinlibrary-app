@@ -18,8 +18,7 @@ public class BookService {
   private final UserRepository userRepository;
   private final UserLoanHistoryRepository userLoanHistoryRepository;
 
-  public BookService(
-      BookRepository bookRepository,
+  public BookService(BookRepository bookRepository,
       UserRepository userRepository,
       UserLoanHistoryRepository userLoanHistoryRepository
   ) {

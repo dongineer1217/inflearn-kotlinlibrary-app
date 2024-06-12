@@ -4,8 +4,11 @@ import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import javax.persistence.*
 
+/**
+ * 아래와 같이 constructor를 사용하면 생성자 호출하는 다른 소스 추적이 가능
+ */
 @Entity
-class User(
+class User constructor(
 
     @Column(nullable = false)
     var name: String,
